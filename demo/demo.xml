@@ -1,0 +1,19 @@
+<odoo>
+    <record id="member_hda" model="hostel.student">
+        <field name="name">Husen Daudi</field>
+        <field name="gender">male</field>
+    </record>
+    <record id="member_jvo" model="hostel.student">
+        <field name="name">Jay Vora</field>
+        <field name="gender">female</field>
+    </record>
+    <record id="hostel_room_1" model="hostel.room">
+        <field name="room_name">Hostel Room 02</field>
+        <field name="room_number">1002</field>
+        <field name="room_floor">1</field>
+        <field name="student_per_room">2</field>
+        <field name="student_ids"
+            eval="[(6, 0, [ref('member_hda'), ref('member_jvo')])]"
+        />
+    </record>
+</odoo>

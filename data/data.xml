@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record forcecreate="True" id="decimal_point" model="decimal.precision">
+        <field name="name">Rating Value</field>
+        <field name="digits">3</field>
+    </record>
+
+    <!-- Chapter 6 -->
+    <record id="hostel_room" model="hostel.room">
+        <field name="room_name"> Hostel Room 01 </field>
+        <field name="room_number">1000</field>
+        <field name="room_floor">1</field>
+        <field name="student_per_room">2</field>
+    </record>
+
+    <record id="base.main_company" model="res.company">
+        <field name="name">Packt Publishing</field>
+    </record>
+
+    <record id="room_category_to_remove" model="hostel.categ">
+        <field name="name">Single sharing</field>
+    </record>
+    <record id="room_category_not_remove" model="hostel.categ">
+        <field name="name">Double Sharing</field>
+    </record>
+
+    <delete model="hostel.categ" id="room_category_to_remove" />
+    <!-- <delete model="hostel.categ" search="[('name', 'ilike','Single Room Category')]"/> -->
+
+    <!-- <function model="hostel.room" name="_update_room_price" /> -->
+
+    <record id="room_category_update_price" model="hostel.categ" forcecreate="false">
+        <field name="name">Update price</field>
+    </record>
+    <function model="hostel.room"
+        name="update_room_price"
+        eval="(ref('room_category_update_price'), 20)" />
+
+    <record id="hostel_room_404" model="hostel.room">
+        <field name="room_name"> Hostel Room 404 </field>
+        <field name="room_number">404</field>
+        <field name="room_floor">4</field>
+        <field name="student_per_room">404</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_hostel_student" model="ir.actions.act_window">
+        <field name="name">Hostel Student</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.student</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create Hostel Student.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="hostel_student_type_menu" name="Students" parent="hostel_main_menu"
+        action="my_hostel.action_hostel_student" sequence="30" />
+
+    <!-- Form view -->
+    <record id="view_hostel_student_form_view" model="ir.ui.view">
+        <field name="name">hostel.student.form.view</field>
+        <field name="model">hostel.student</field>
+        <field name="arch" type="xml">
+            <form string="Hostel">
+                <sheet>
+                    <div class="oe_title">
+                        <h3>
+                            <table>
+                                <tr>
+                                    <td style="padding-right:10px;">
+                                        <field name="name"
+                                            placeholder="Student Name" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="gender" required="1" />
+                            <field name="active" required="1" />
+                            <field name="room_id" />
+                            <field name="hostel_id" />
+                        </group>
+                        <group>
+                            <field name="admission_date" />
+                            <field name="discharge_date" />
+                            <field name="duration" />
+                            <field name="city" />
+                        </group>
+                        <group>
+                            <field name="room_no" />
+                            <button name="update_room_no" string="Update Room No" type="object" />
+                        </group>
+                        <group>
+                            <field name="status" />
+                            <button name="action_assign_room" string="Assign Room" type="object"
+                                class="btn-primary" />
+                            <button name="my_hostel.action_assign_room_student_wizard"
+                                string="Assign Room With Wizard" type="action" class="btn-primary" />
+                            <button name="action_remove_room" string="Remove Room" type="object"
+                                class="btn-primary" />
+                            <button name="return_room" string="Return Room" type="object"
+                                class="btn-primary" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="view_hostel_student_tree_view" model="ir.ui.view">
+        <field name="name">hostel.student.tree.view</field>
+        <field name="model">hostel.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="gender" />
+                <field name="room_id" />
+                <field name="hostel_id" />
+                <field name="admission_date" />
+                <field name="discharge_date" />
+                <field name="duration" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_hostel_student_search_view" model="ir.ui.view">
+        <field name="name">Hostel Student Search</field>
+        <field name="model">hostel.student</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="gender" />
+                <field name="room_id" />
+                <field name="hostel_id" />
+            </search>
+        </field>
+    </record>
+</odoo>

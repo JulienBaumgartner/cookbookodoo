@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+
+    
+    <!-- Form view -->
+    <record id="view_hostel_book_form_view" model="ir.ui.view">
+        <field name="name">hostel.book.form.view</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <form string="Hostel">
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="city" />
+                        <field name="is_hostel_rector" />
+                        <field name="assign_room_ids" />
+                        <field name="count_assign_room" />
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="view_hostel_book_tree_view" model="ir.ui.view">
+        <field name="name">hostel.book.tree.view</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id" />
+                <field name="name" />
+                <field name="city" />
+                <field name="is_hostel_rector" />
+                <field name="assign_room_ids" />
+                <field name="count_assign_room" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_hostel_book_search_view" model="ir.ui.view">
+        <field name="name">Hostel Book Search</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="assign_room_ids" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_hostel_book" model="ir.actions.act_window">
+        <field name="name">Hostel Book</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids"
+            eval="[(5, 0, 0), (0, 0, { 'view_mode':'tree', 'view_id': ref('view_hostel_book_tree_view') }), (0, 0, { 'view_mode':'form', 'view_id': ref('view_hostel_book_form_view') })]" />
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create Hostel Book.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="hostel_book_type_menu" name="Partners" parent="hostel_main_menu"
+        action="my_hostel.action_hostel_book" groups="my_hostel.group_hostel_manager" sequence="60" />
+
+</odoo>

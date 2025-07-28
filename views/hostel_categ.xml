@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_hostel_categ" model="ir.actions.act_window">
+        <field name="name">Hostel Categories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.categ</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create Hostel Categories.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="hostel_categ_type_menu" name="Categories" parent="hostel_main_menu"
+        action="my_hostel.action_hostel_categ" groups="my_hostel.group_hostel_manager"
+        sequence="50" />
+
+    <!-- Form view -->
+    <record id="view_hostel_categ_form_view" model="ir.ui.view">
+        <field name="name">hostel.categ.form.view</field>
+        <field name="model">hostel.categ</field>
+        <field name="arch" type="xml">
+            <form string="Hostel">
+                <sheet>
+                    <div class="oe_title">
+                        <h3>
+                            <table>
+                                <tr>
+                                    <td style="padding-right:10px;">
+                                        <field name="name"
+                                            placeholder="Categories Name" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </h3>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="parent_id" />
+                            <field name="parent_path" />
+                        </group>
+                        <group>
+                            <button name="create_categories" string="Create Categories" type="object"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree view -->
+    <record id="view_hostel_categ_tree_view" model="ir.ui.view">
+        <field name="name">hostel.categ.tree.view</field>
+        <field name="model">hostel.categ</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="parent_id" />
+                <field name="parent_path" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_hostel_categ_search_view" model="ir.ui.view">
+        <field name="name">Hostel Categories Search</field>
+        <field name="model">hostel.categ</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+</odoo>

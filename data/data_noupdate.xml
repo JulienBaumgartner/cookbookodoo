@@ -1,0 +1,10 @@
+<odoo noupdate="1">
+    <record id="res_partner_packt" model="res.partner">
+        <field name="name">Packt Publishing</field>
+        <field name="city">Birmingham</field>
+        <field name="country_id" ref="base.uk" />
+    </record>
+    <record id="room_category_all" model="hostel.categ" forcecreate="false">
+        <field name="name">All rooms</field>
+    </record>
+</odoo>
