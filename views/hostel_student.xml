@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="action_hostel_student" model="ir.actions.act_window">
-        <field name="name">Hostel Student</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">hostel.student</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                Create Hostel Student.
-            </p>
-        </field>
-    </record>
 
-    <menuitem id="hostel_student_type_menu" name="Students" parent="hostel_main_menu"
-        action="my_hostel.action_hostel_student" sequence="30" />
 
     <!-- Form view -->
     <record id="view_hostel_student_form_view" model="ir.ui.view">
@@ -60,7 +47,7 @@
                             <button name="action_remove_room" string="Remove Room" type="object"
                                 class="btn-primary" />
                             <button name="return_room" string="Return Room" type="object"
-                                class="btn-primary" />
+                                class="btn-primary" groups="my_hostel.group_hostel_manager" />
                         </group>
                     </group>
                 </sheet>
@@ -98,4 +85,19 @@
             </search>
         </field>
     </record>
+
+    <record id="action_hostel_student" model="ir.actions.act_window">
+        <field name="name">Hostel Student</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hostel.student</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Create Hostel Student.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="hostel_student_type_menu" name="Students" parent="hostel_main_menu"
+        action="my_hostel.action_hostel_student" sequence="30" />
 </odoo>

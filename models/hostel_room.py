@@ -1,6 +1,7 @@
 from odoo import fields, models, api
 from odoo.exceptions import ValidationError, UserError
 from odoo.tools.translate import _
+from odoo.tests.common import Form
 import logging
 EXPORTS_DIR = '/srv/exports'
 _logger = logging.getLogger(__name__)

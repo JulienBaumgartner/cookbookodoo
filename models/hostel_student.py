@@ -15,7 +15,8 @@ class HostelStudent(models.Model):
     admission_date = fields.Date("Admission Date", help="Date of admission in hostel", default=fields.Datetime.today)
     discharge_date = fields.Date("Discharge Date", help="Date on which student discharge")
     # duration = fields.Integer("Duration", compute="_compute_check_duration", inverse="_inverse_duration", help="Enter duration of living")
-    duration = fields.Integer("Duration", help="Enter duration of living")
+    # duration = fields.Integer("Duration", help="Enter duration of living")
+    duration = fields.Integer("Duration", compute="onchange_duration", help="Enter duration of living")
     room_no = fields.Char('Room No')
     status = fields.Selection([("draft", "Draft"),
                     ("reservation", "Reservation"), ("pending", "Pending"),
@@ -73,11 +74,12 @@ class HostelStudent(models.Model):
         else:
             raise UserError(_("You can only remove the room from the student record in the hostel room context."))
 
-    @api.onchange('admission_date', 'discharge_date')
+    #@api.onchange('admission_date', 'discharge_date') #coté client uniquement
+    @api.depends('admission_date', 'discharge_date')
     def onchange_duration(self):
-        if self.discharge_date and self.admission_date:
-            self.duration = (self.discharge_date.year - 
-            self.admission_date.year) * 12 + (self.discharge_date.month - self.admission_date.month)
+        for stu in self:
+            if stu.discharge_date and stu.admission_date:
+                stu.duration = (stu.discharge_date.year - stu.admission_date.year) * 12 + (stu.discharge_date.month - stu.admission_date.month)
 
     def return_room(self):
         self.ensure_one()
