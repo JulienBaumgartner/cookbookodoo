@@ -16,6 +16,7 @@ class HostelRoom(models.Model):
     room_name = fields.Char(string="Room Name", required=True)
     room_number = fields.Integer(string="Room Number", required=True)
     room_floor = fields.Integer(string="Room Floor", required=True)
+    description = fields.Html('Description')
     currency_id = fields.Many2one('res.currency', string='Currency')
     rent_amount = fields.Monetary('Rent Amount', help="Enter rent amount per month") # optional attribute: currency_field='currency_id' incase currency field have another name then 'currency_id'
     student_per_room = fields.Integer("Student Per Room", required=True, default=1, help="Students allocated per room")
@@ -31,6 +32,10 @@ class HostelRoom(models.Model):
     previous_room = fields.Many2one('hostel.room', string='Previous Room')
     category_id = fields.Many2one('hostel.categ', string='Category')
     allocation_date = fields.Date(string="Allocation Date")
+    room_rating = fields.Float('Hostel Average Rating', digits=(14, 4))
+    sequence = fields.Integer(default=10)
+    other_info = fields.Text("Other Information",
+        help="Enter more information")
 
     @api.constrains("rent_amount")
     def _check_rent_amount(self):

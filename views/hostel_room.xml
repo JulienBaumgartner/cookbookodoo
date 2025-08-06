@@ -1,136 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Form view -->
-    <record id="view_hostel_room_form_view" model="ir.ui.view">
-        <field name="name">hostel.room.form.view</field>
+    <!-- Form View -->
+    <record id="hostel_room_view_form" model="ir.ui.view">
+        <field name="name">Hostel Room Form</field>
         <field name="model">hostel.room</field>
         <field name="arch" type="xml">
-            <form string="Hostel">
-                <sheet>
-                    <div class="oe_title">
-                        <h3>
-                            <table>
-                                <tr>
-                                    <td style="padding-right:10px;">
-                                        <field name="room_name"
-                                            placeholder="Room Name" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </h3>
-                    </div>
+            <form>
+                <header>
+                    <button name="make_available" string="Make Available" type="object"
+                        class="btn-primary" />
+                    <button name="make_closed" string="Make Closed" type="object"
+                        class="btn-default" />
+                    <button type="action" name="%(my_hostel.action_hostel_categ)d"
+                        string="Open Hotel Category" />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <group string="Content" name="my_content">
+                    <!-- <widget name="web_ribbon" title="Archived" bg_color="bg-danger" /> -->
                     <group>
-                        <group>
-                            <field name="active" />
-                            <field name="room_number" required="1" placeholder="Room Number" />
-                            <field name="room_floor" required="1" placeholder="Room Floor" />
-                            <field name="hostel_id" required="1" placeholder="Hostel" />
-                            <field name="previous_room" />
-                            <field name="student_per_room" required="1"
-                                placeholder="Students Per Room" />
-                            <field name="remarks" />
-                        </group>
-                        <group>
-                            <field name="currency_id" required="1" placeholder="Currency" />
-                            <field name="rent_amount" required="1" placeholder="Rent Amount" />
-                            <field name="hostel_amenities_ids" widget="many2many_tags"
-                                options="{'no_create': True}" />
-                            <field name="category_id" />
-                            <field name="allocation_date" />
-                        </group>
-                        <group>
-                            <button name="make_available" string="Make Available" type="object" />
-                            <button name="make_closed" string="Make Borrowed" type="object" />
-                            <field name="state" widget="statusbar" />
-                        </group>
-                        <group>
-                            <p>Chapter 5</p>
-                            <button name="log_all_room_members" string="Log Members" type="object" />
-                            <button name="find_room" string="Find Room" type="object" />
-                            <button name="find_partner" string="Find Partner" type="object" />
-                            <button name="filter_members" string="Filter Members" type="object" />
-                            <button name="show_result" string="Show Result" type="object" />
-                            <button name="get_average_cost" string="Get average cost" type="object" />
-                        </group>
-                        <group>
-                            <p>Chapter 7</p>
-                            <button name="log_room_details" string="Log Rooms Details" type="object" />
-                        </group>
-                        <group>
-                            <p>Chapter 8</p>
-                            <button name="action_remove_room_members" string="Remove Room Members"
-                                type="object" class="btn-primary" />
-                            <button name="action_category_with_amount"
-                                string="Log Category With Amount" type="object" />
-                        </group>
+                        <field name="room_name" />
+                        <field name="room_number" />
                     </group>
-                </sheet>
+                </group>
+                <notebook>
+                    <page string="Other Information" name="other_information">
+                        <field name="other_info" widget="html" />
+                    </page>
+                </notebook>
             </form>
         </field>
     </record>
 
-    <!-- Tree view -->
-    <record id="view_hostel_room_tree_view" model="ir.ui.view">
-        <field name="name">hostel.room.tree.view</field>
+    <!-- Inherit Form View -->
+    <record id="hostel_room_view_form_inherit" model="ir.ui.view">
+        <field name="name">Hostel Room Form Inherit</field>
+        <field name="model">hostel.room</field>
+        <field name="inherit_id" ref="my_hostel.hostel_room_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='my_content']/group" position="inside">
+                <field name="student_per_room"/>
+            </xpath>
+            <xpath expr="//group[@name='my_content']/group" position="after">
+                <group>
+                        <field name="description" />
+                    <field name="room_rating"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Tree(list) View -->
+    <record id="hostel_room_view_tree" model="ir.ui.view">
+        <field name="name">Hostel Room List</field>
         <field name="model">hostel.room</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="id" />
-                <field name="hostel_id" />
+                <!-- <tree editable="bottom"> -->
                 <field name="room_name" />
                 <field name="room_number" />
-                <field name="rent_amount" />
-                <field name="previous_room" />
-                <field name="availability" />
+                <field name="state" optional="show" />
+                <field name="sequence" widget="handle" />
             </tree>
         </field>
     </record>
 
-    <!-- Search -->
-    <record id="view_hostel_room_search_view" model="ir.ui.view">
-        <field name="name">Hostel Room Search</field>
+    <!-- Inherit Tree(list) View -->
+    <record id="hostel_room_view_tree_inherit" model="ir.ui.view">
+        <field name="name">Hostel Room List Inherit</field>
+        <field name="model">hostel.room</field>
+        <field name="inherit_id" ref="my_hostel.hostel_room_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='room_name']" position="after">
+                <field name="student_per_room"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search View-->
+    <record id="hostel_room_view_search" model="ir.ui.view">
         <field name="model">hostel.room</field>
         <field name="arch" type="xml">
             <search>
                 <field name="room_name" />
                 <field name="room_number" />
-                <field name="room_floor" />
-                <field name="currency_id" />
-                <field name="rent_amount" />
+                <group expand="0" string="Group By">
+                    <filter string="State" name="state"
+                        context="{'group_by':'state'}" />
+                </group>
+                <searchpanel>
+                    <field name="state" expand="1" select="multi"
+                        icon="fa-check-square-o" enable_counters="1" />
+                </searchpanel>
             </search>
+        </field>
+    </record>
+
+     <!-- Inherit Search view-->
+    <record id="hostel_room_view_search_inherit" model="ir.ui.view">
+        <field name="name">Hostel Room Search inherit</field>
+        <field name="model">hostel.room</field>
+        <field name="inherit_id" ref="my_hostel.hostel_room_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="." position="inside">
+                <field name="room_rating"></field>
+            </xpath>
         </field>
     </record>
 
     <record id="action_hostel_room" model="ir.actions.act_window">
         <field name="name">Hostel Room</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">hostel.room</field>
+        <field name="view_id" ref="hostel_room_view_tree" />
+        <field name="search_view_id" ref="hostel_room_view_search" />
         <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">
-                Create Hostel Room.
-            </p>
-        </field>
-    </record> 
-
-    <!-- <menuitem id="hostel_room_type_menu" name="Rooms" parent="hostel_main_menu"
-        action="my_hostel.action_hostel_room" sequence="20" /> -->
-
+        <field name="context">{'lang': 'en_US','default_lang': 'en_US', 'active_test': False,
+            'default_room_rating': 1.0}</field>
+        <!-- <field name="domain">[('state', '=', 'draft')]</field> -->
+    </record>
 
     <record id="action_hostel_room_tree" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_hostel_room" />
-        <field name="view_id" ref="view_hostel_room_tree_view" />
+        <field name="view_id" ref="hostel_room_view_tree" />
         <field name="view_mode">tree</field>
         <field name="sequence" eval="1" />
     </record>
 
     <record id="action_hostel_room_form" model="ir.actions.act_window.view">
         <field name="act_window_id" ref="action_hostel_room" />
-        <field name="view_id" ref="view_hostel_room_form_view" />
+        <field name="view_id" ref="hostel_room_view_form" />
         <field name="view_mode">form</field>
         <field name="sequence" eval="2" />
     </record>
 
-    <menuitem id="menu_all_hostel_room" parent="hostel_main_menu" action="action_hostel_room" sequence="20" groups="" />
+    <menuitem id="menu_all_hostel_room" parent="hostel_main_menu" action="action_hostel_room"
+        sequence="20" groups="" />
 
 </odoo>
