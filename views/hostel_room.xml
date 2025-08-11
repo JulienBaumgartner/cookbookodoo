@@ -15,18 +15,36 @@
                         string="Open Hotel Category" />
                     <field name="state" widget="statusbar" />
                 </header>
-                <group string="Content" name="my_content">
-                    <!-- <widget name="web_ribbon" title="Archived" bg_color="bg-danger" /> -->
-                    <group>
-                        <field name="room_name" />
-                        <field name="room_number" />
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" class="oe_stat_button" icon="fa-pencil-square-o"
+                            name="action_open_related_students">
+                            <div class="o_form_field o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="related_students" />
+                                </span>
+                                <span class="o_stat_text">Hostel Students</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group string="Content" name="my_content">
+                        <!-- <widget name="web_ribbon" title="Archived" bg_color="bg-danger" /> -->
+                        <group>
+                            <field name="room_name" />
+                            <field name="room_number" />
+                        </group>
+                        <group>
+                            <field name="currency_id" required="1" placeholder="Currency" />
+                            <field name="rent_amount" required="1" placeholder="Rent Amount" invisible="not currency_id"/>
+                        </group>
                     </group>
-                </group>
-                <notebook>
-                    <page string="Other Information" name="other_information">
-                        <field name="other_info" widget="html" />
-                    </page>
-                </notebook>
+                    <notebook>
+                        <page string="Other Information" name="other_information">
+                            <field name="other_info" widget="html" />
+                        </page>
+                    </notebook>
+                </sheet>
             </form>
         </field>
     </record>
@@ -38,12 +56,12 @@
         <field name="inherit_id" ref="my_hostel.hostel_room_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='my_content']/group" position="inside">
-                <field name="student_per_room"/>
+                <field name="student_per_room" />
             </xpath>
             <xpath expr="//group[@name='my_content']/group" position="after">
                 <group>
-                        <field name="description" />
-                    <field name="room_rating"/>
+                    <field name="description" />
+                    <field name="room_rating" />
                 </group>
             </xpath>
         </field>
@@ -71,7 +89,7 @@
         <field name="inherit_id" ref="my_hostel.hostel_room_view_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='room_name']" position="after">
-                <field name="student_per_room"/>
+                <field name="student_per_room" />
             </xpath>
         </field>
     </record>
@@ -95,7 +113,7 @@
         </field>
     </record>
 
-     <!-- Inherit Search view-->
+    <!-- Inherit Search view-->
     <record id="hostel_room_view_search_inherit" model="ir.ui.view">
         <field name="name">Hostel Room Search inherit</field>
         <field name="model">hostel.room</field>

@@ -36,6 +36,7 @@ class HostelRoom(models.Model):
     sequence = fields.Integer(default=10)
     other_info = fields.Text("Other Information",
         help="Enter more information")
+    related_students = fields.Integer(compute='_compute_related_students')
 
     @api.constrains("rent_amount")
     def _check_rent_amount(self):
@@ -214,4 +215,23 @@ class HostelRoom(models.Model):
         result = self.env.cr.fetchall()
         _logger.info("Hostel Room With Amount: %s", result)
         
+    def _compute_related_students(self):
+        for record in self:
+            record.related_students = self.env['hostel.student'].search_count([
+                ('room_id', '=', record.id),
+            ])
+        
+    def action_open_related_students(self):
+        related_students_ids = self.env['hostel.student'].search([
+                ('room_id', '=', self.id),
+            ]).ids
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Hostel Students'),
+            'res_model': 'hostel.student',
+            'view_type': 'list',
+            'view_mode': 'list',
+            'views': [[False, 'list'], [False, 'form']],
+            'domain': [('id', 'in', related_students_ids)],
+        }
     
