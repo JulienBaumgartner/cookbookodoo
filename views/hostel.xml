@@ -12,10 +12,12 @@
         </field>
     </record>
 
-    <!--web_icon: entreprise version only -->
-    <menuitem id="hostel_main_menu" name="Hostel" sequence="1" web_icon="my_hostel,static/description/icon.png"/>
+    <!--web_icon:
+    entreprise version only -->
+    <menuitem id="hostel_main_menu" name="Hostel" sequence="1"
+        web_icon="my_hostel,static/description/icon.png" />
     <menuitem id="hostel_type_menu" name="Hostel" parent="hostel_main_menu"
-        action="my_hostel.action_hostel" groups="my_hostel.group_hostel_manager" sequence="10" />
+        action="my_hostel.action_hostel" sequence="10" />
 
     <!-- Form view -->
     <record id="view_hostel_form_view" model="ir.ui.view">
@@ -80,7 +82,12 @@
                             <field name="hostel_rating" />
                             <field name="category_id" />
                             <field name="other_info" />
+                            <field name="date_start" />
                         </group>
+                    </group>
+                    <group>
+                        <field name="is_public" />
+                        <field name="notes" />
                     </group>
                     <group>
                         <field name="description" />

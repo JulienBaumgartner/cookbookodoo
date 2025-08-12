@@ -12,17 +12,39 @@
                     data-key="my_hostel" groups="my_hostel.group_hostel_manager">
                     <h2>Hostel</h2>
                     <div class="row mt16 o_settings_container">
-                        <div class="col-12 col-lg-6 o_setting_box" id="hostel">
+                        <!-- Group user -->
+                        <div class="col-12 col-lg-6 o_setting_box">
                             <div class="o_setting_left_pane">
                                 <field name="group_hostel_user" />
                             </div>
                             <div class="o_setting_right_pane">
                                 <label for="group_hostel_user" />
-                                <div class="text-muted">
-                                    Allow users to hostel user
-                                </div>
+                                <div class="text-muted">Allow users to hostel user</div>
                             </div>
                         </div>
+
+                        <!-- Start date -->
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="group_start_date" class="oe_inline"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="group_start_date" />
+                                <div class="text-muted">Enable Start date feature on hostels</div>
+                            </div>
+                        </div>
+
+                        <!-- Note module-->
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="module_my_module" class="oe_inline"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="module_my_module" />
+                                <div class="text-muted">Install my_module</div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </xpath>

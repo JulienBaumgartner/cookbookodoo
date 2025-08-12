@@ -80,6 +80,8 @@ class HostelStudent(models.Model):
         for stu in self:
             if stu.discharge_date and stu.admission_date:
                 stu.duration = (stu.discharge_date.year - stu.admission_date.year) * 12 + (stu.discharge_date.month - stu.admission_date.month)
+            else:
+                stu.duration = 0
 
     def return_room(self):
         self.ensure_one()

@@ -33,6 +33,9 @@
                             <field name="discharge_date" />
                             <field name="duration" />
                             <field name="city" />
+                            <field name="partner_id" widget="res_partner_many2one"
+                                context="{'show_address': 1}"
+                                options='{"always_reload": True}' />
                         </group>
                         <group>
                             <field name="room_no" />

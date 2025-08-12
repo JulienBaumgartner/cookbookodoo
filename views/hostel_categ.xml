@@ -4,7 +4,7 @@
         <field name="name">Hostel Categories</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">hostel.categ</field>
-        <field name="view_mode">tree,kanban,calendar,form,pivot,graph,activity</field>
+        <field name="view_mode">tree,kanban,calendar,form,pivot,graph,activity,cohort,gantt,map</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 Create Hostel Categories.
@@ -43,6 +43,7 @@
                     <group>
                         <group>
                             <field name="description" />
+                            <field name="address" />
                             <field name="date_assign" />
                             <field name="date_end" />
                             <field name="parent_id" />
@@ -191,17 +192,17 @@
     </record>
 
     <!-- Cohort View -->
-    <!-- <record id="hostel_room_category_view_cohort" model="ir.ui.view">
+    <record id="hostel_room_category_view_cohort" model="ir.ui.view">
         <field name="name">Hostel Room Categories Cohort</field>
         <field name="model">hostel.categ</field>
         <field name="arch" type="xml">
             <cohort date_start="date_assign" date_stop="date_end"
                 interval="month" string="Categories Cohort" />
         </field>
-    </record> -->
+    </record>
 
     <!-- Gantt View -->
-    <!-- <record id="hostel_room_category_view_gantt" model="ir.ui.view">
+    <record id="hostel_room_category_view_gantt" model="ir.ui.view">
         <field name="name">Hostel Room Categories Gantt</field>
         <field name="model">hostel.categ</field>
         <field name="arch" type="xml">
@@ -226,7 +227,7 @@
                 </templates>
             </gantt>
         </field>
-    </record> -->
+    </record>
 
     <!-- Activity View -->
     <record id="hostel_room_category_view_activity" model="ir.ui.view">
@@ -248,15 +249,14 @@
     </record>
 
     <!-- Map View -->
-    <!-- <record id="hostel_room_category_view_map" model="ir.ui.view">
+    <record id="hostel_room_category_view_map" model="ir.ui.view">
         <field name="name">Hostel Room Categories Map</field>
-        <field name="model">
-            hostel.room.category</field>
+        <field name="model">hostel.categ</field>
         <field name="arch" type="xml">
             <map>
                 <field name="name" string="Title " />
                 <field name="parent_id" string="Hostel Room Category" />
             </map>
         </field>
-    </record> -->
+    </record>
 </odoo>

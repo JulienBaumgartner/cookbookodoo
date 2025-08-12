@@ -17,7 +17,7 @@ class HostelCategory(models.Model):
     related_hostel_room = fields.Integer(compute='_compute_related_hostel_room')
     date_end = fields.Datetime(string='Ending Date', index=True, copy=False)
     date_assign = fields.Datetime(string='Assigning Date', copy=False,)
-    
+    address = fields.Char(string="Address")
     
     @api.constrains('parent_id')
     def _check_hierarchy(self):

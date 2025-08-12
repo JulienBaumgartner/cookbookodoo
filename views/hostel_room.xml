@@ -62,6 +62,8 @@
                 <group>
                     <field name="description" />
                     <field name="room_rating" />
+                    <field name="category_id" />
+
                 </group>
             </xpath>
         </field>

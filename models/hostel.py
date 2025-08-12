@@ -25,7 +25,12 @@ class Hostel(models.Model):
     description = fields.Html('Description')
     hostel_rating = fields.Float('Hostel Average Rating', digits='Rating Value')
     category_id = fields.Many2one('hostel.categ', string='Category')
-    ref_doc_id = fields.Reference(selection='_referencable_models', string='Reference Document')
+    ref_doc_id = fields.Reference(groups='my_hostel.group_hostel_manager', selection='_referencable_models', string='Reference Document')
+
+
+    is_public = fields.Boolean(groups='my_hostel.group_hostel_manager')
+    notes = fields.Text(groups='my_hostel.group_hostel_manager')
+    date_start = fields.Date('Start Date', groups='my_hostel.group_start_date')
 
     @api.depends('hostel_code')
     def _compute_display_name(self): 
