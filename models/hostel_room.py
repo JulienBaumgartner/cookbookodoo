@@ -12,6 +12,10 @@ class HostelRoom(models.Model):
     _rec_name = 'room_name'
     _sql_constraints = [("room_number_unique", "unique(room_number)", "Room number must be unique!")]
     
+    @api.model
+    def _default_room_stage(self):
+        stage = self.env['hostel.room.stage']
+        return stage.search([], limit=1)
     
     room_name = fields.Char(string="Room Name", required=True)
     room_number = fields.Integer(string="Room Number", required=True)
@@ -28,6 +32,7 @@ class HostelRoom(models.Model):
     hostel_amenities_ids = fields.Many2many("hostel.amenities", "hostel_room_amenities_rel", "room_id", "amenity_id", string="Amenities", domain="[('active', '=', True)]", help="Select hostel room amenities")
 
     state = fields.Selection([('draft', 'Unavailable'),('available', 'Available'),('closed', 'Closed')],'State', default="draft")
+    # stage_id = fields.Many2one('hostel.room.stage', string='Stage', default=_default_room_stage)
     remarks = fields.Text('Remarks')
     previous_room = fields.Many2one('hostel.room', string='Previous Room')
     category_id = fields.Many2one('hostel.categ', string='Category')
@@ -234,4 +239,6 @@ class HostelRoom(models.Model):
             'views': [[False, 'list'], [False, 'form']],
             'domain': [('id', 'in', related_students_ids)],
         }
+    
+
     

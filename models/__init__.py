@@ -7,4 +7,5 @@ from . import hostel_amenities
 from . import hostel_categ
 from . import hostel_book
 from . import hostel_room_availability
+# from . import hostel_room_stage
 from . import res_config_settings

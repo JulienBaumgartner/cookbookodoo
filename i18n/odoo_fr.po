@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* my_hostel
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-08-15 13:00+0000\n"
+"PO-Revision-Date: 2025-08-15 13:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_categ__message_needaction
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__message_needaction
+msgid "Action Needed"
+msgstr "Action nécessaire"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_base_archive__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_amenities__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_hostel__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_room_copy__active
+#: model:ir.model.fields,field_description:my_hostel.field_hostel_student__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: my_hostel
+#: model:ir.model,name:my_hostel.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: my_hostel
+#: model:ir.model.fields,field_description:my_hostel.field_res_config_settings__group_hostel_user
+#: model:res.groups,name:my_hostel.group_hostel_user
+msgid "Hostel User"
+msgstr "Hostel Utilisateur"

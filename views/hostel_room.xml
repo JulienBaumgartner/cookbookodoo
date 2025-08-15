@@ -13,7 +13,8 @@
                         class="btn-default" />
                     <button type="action" name="%(my_hostel.action_hostel_categ)d"
                         string="Open Hotel Category" />
-                    <field name="state" widget="statusbar" />
+                    <!-- <field name="state" widget="statusbar" /> -->
+                     <!-- <field name="stage_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/> -->
                 </header>
 
                 <sheet>
@@ -33,6 +34,7 @@
                         <group>
                             <field name="room_name" />
                             <field name="room_number" />
+                            <field name="hostel_id" />
                         </group>
                         <group>
                             <field name="currency_id" required="1" placeholder="Currency" />
@@ -78,7 +80,8 @@
                 <!-- <tree editable="bottom"> -->
                 <field name="room_name" />
                 <field name="room_number" />
-                <field name="state" optional="show" />
+                <!-- <field name="state" optional="show" /> -->
+                <!-- <field name="stage_id" /> -->
                 <field name="sequence" widget="handle" />
             </tree>
         </field>
