@@ -34,6 +34,11 @@ class Hostel(models.Model):
     
     details_added = fields.Text(string="Details", groups='my_hostel.group_hostel_manager')
 
+    rooms_count = fields.Integer(compute="_compute_rooms_count")
+    
+    rector = fields.Many2one("res.partner", "Rector",
+        help="Select hostel rector")
+
     @api.depends('hostel_code')
     def _compute_display_name(self): 
         for record in self:
@@ -52,3 +57,8 @@ class Hostel(models.Model):
         self.ensure_one()
         message = "Details are(added by: %s)" % self.env.user.name
         self.sudo().write({'details_added': message})
+        
+    def _compute_rooms_count(self):
+        room_obj = self.env['hostel.room']
+        for hostel in self:
+            hostel.rooms_count = room_obj.search_count([('hostel_id', '=', hostel.id)])

@@ -7,7 +7,7 @@ EXPORTS_DIR = '/srv/exports'
 _logger = logging.getLogger(__name__)
 class HostelRoom(models.Model):
     _name = "hostel.room"
-    _inherit = ['base.archive']
+    _inherit = ['base.archive', 'mail.thread', 'mail.activity.mixin']
     _description = "Hostel Room Information"
     _rec_name = 'room_name'
     _sql_constraints = [("room_number_unique", "unique(room_number)", "Room number must be unique!")]
@@ -17,6 +17,11 @@ class HostelRoom(models.Model):
         stage = self.env['hostel.room.stage']
         return stage.search([], limit=1)
     
+    @api.model
+    def _group_expand_stages(self, stages, domain, order):
+        return stages.search([], order=order)
+    
+    active = fields.Boolean(default=True)
     room_name = fields.Char(string="Room Name", required=True)
     room_number = fields.Integer(string="Room Number", required=True)
     room_floor = fields.Integer(string="Room Floor", required=True)
@@ -31,8 +36,8 @@ class HostelRoom(models.Model):
     student_ids = fields.One2many("hostel.student", "room_id", string="Students", help="Enter students")
     hostel_amenities_ids = fields.Many2many("hostel.amenities", "hostel_room_amenities_rel", "room_id", "amenity_id", string="Amenities", domain="[('active', '=', True)]", help="Select hostel room amenities")
 
-    state = fields.Selection([('draft', 'Unavailable'),('available', 'Available'),('closed', 'Closed')],'State', default="draft")
-    # stage_id = fields.Many2one('hostel.room.stage', string='Stage', default=_default_room_stage)
+    # state = fields.Selection([('draft', 'Unavailable'),('available', 'Available'),('closed', 'Closed')],'State', default="draft")
+    stage_id = fields.Many2one('hostel.room.stage', string='Stage', default=_default_room_stage, group_expand="_group_expand_stages")
     remarks = fields.Text('Remarks')
     previous_room = fields.Many2one('hostel.room', string='Previous Room')
     category_id = fields.Many2one('hostel.categ', string='Category')
@@ -42,6 +47,11 @@ class HostelRoom(models.Model):
     other_info = fields.Text("Other Information",
         help="Enter more information")
     related_students = fields.Integer(compute='_compute_related_students')
+    
+    color = fields.Integer()
+    popularity = fields.Selection([('no', 'No Demand'), ('low','Low Demand'),
+                                   ('medium', 'Average Demand'), ('high', 'High Demand'),])
+    
 
     @api.constrains("rent_amount")
     def _check_rent_amount(self):

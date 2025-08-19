@@ -22,6 +22,9 @@
     "views/res_config_settings.xml",
     "data/data.xml",
     "data/data_noupdate.xml",
+    "data/room_stages.xml",
+    "reports/hostel_room_detail_report.xml",
+    "reports/hostel_room_detail_report_template.xml"
 ],
 'pre_init_hook': 'pre_init_hook_hostel',
 'post_init_hook': 'add_room_hook',
