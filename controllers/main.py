@@ -2,6 +2,7 @@ from odoo import http, fields
 from odoo.http import request
 import email
 import datetime
+from odoo.addons.website.controllers.main import Website
 
 class Main(http.Controller):
     @http.route('/my_hostel/students', type='http', auth='none')
@@ -77,3 +78,35 @@ class Main(http.Controller):
                 type='http', auth='none')
     def student_details_in_path(self, student):
         return self.student_details(student.id)
+    
+    @http.route('/demo_page', type='http', auth='none')
+    def students_img(self):
+        image_url = '/my_hostel/static/src/img/icon.png'
+        html_result = """<html>
+                         <body>
+                         <img src="%s"/>
+                         </body>
+                        </html>""" % image_url
+        return html_result
+    
+    @http.route('/custom-page', type='http', auth='public', website=True)
+    def custom_page(self, **kw):
+        return request.render('my_hostel.custom_template', {})
+    
+    @http.route('/hostel/<model("hostel.hostel"):hostel>',
+            type='http', auth="user", website=True)
+    def hostel_room_detail(self, hostel):
+        return request.render(
+            'my_hostel.hostel_detail', {
+            'hostel': hostel,
+            })
+
+class WebsiteInfo(Website):
+    @http.route()
+    def website_info(self):
+        result = super(WebsiteInfo, self).website_info()
+        result.qcontext['apps'] = result.qcontext['apps'].filtered(
+            lambda x: x.name != 'website'
+        )
+        return result
+    

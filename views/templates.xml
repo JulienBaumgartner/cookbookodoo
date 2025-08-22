@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+    <template id="show_website_info"
+        inherit_id="website.show_website_info">
+        <xpath expr="//dl[@t-foreach='apps']" position="replace">
+            <table class="table">
+                <tr t-foreach="apps" t-as="app">
+                    <th>
+                        <a t-att-href="app.website"
+                            groups='base.group_no_one'>
+                            <t t-out="app.name" />
+                        </a>
+                    </th>
+                    <td>
+                        <span t-out="app.summary" />
+                    </td>
+                </tr>
+            </table>
+        </xpath>
+    </template>
+
+    <template id="custom_template" name="Custom Template">
+        <t t-call="website.layout">
+            <t t-set="page_title">Custom Page</t>
+            <!-- Your content here -->
+            <div class="custom-content">
+                <h1>Welcome to my custom page!</h1>
+                <p>This is a custom template created in Odoo.</p>
+            </div>
+        </t>
+    </template>
+</odoo>

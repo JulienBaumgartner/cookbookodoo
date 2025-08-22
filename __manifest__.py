@@ -6,7 +6,13 @@
 'website': "http://www.example.com",
 'category': 'Hostel',
 'version': '17.0.6.0.3',
-'depends': ['base', 'mail', 'web_cohort', 'web_gantt', 'web_map', 'base_setup'],
+'depends': ['base', 'mail', 'web_cohort', 'web_gantt', 'web_map', 'base_setup', 'website'],
+'assets': {
+    'web.assets_frontend': [
+        'my_hostel/static/src/scss/hostel.scss',
+        'my_hostel/static/src/js/hostel.js',
+    ],
+},
 'data': [
     "security/security_rules.xml",
     "security/hostel_security.xml",
@@ -20,6 +26,8 @@
     "views/hostel_book.xml",
     "views/hostel_room_availability.xml",
     "views/res_config_settings.xml",
+    "views/templates.xml",
+    "views/hostel_templates.xml",
     "data/data.xml",
     "data/data_noupdate.xml",
     "data/room_stages.xml",
