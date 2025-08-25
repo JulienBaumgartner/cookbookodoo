@@ -11,6 +11,7 @@
     'web.assets_frontend': [
         'my_hostel/static/src/scss/hostel.scss',
         'my_hostel/static/src/js/hostel.js',
+        'my_hostel/static/src/js/snippets.js',
     ],
 },
 'data': [
@@ -28,6 +29,9 @@
     "views/res_config_settings.xml",
     "views/templates.xml",
     "views/hostel_templates.xml",
+    "views/snippets.xml",
+    "views/inquiries_view.xml",
+    "views/form_template.xml",
     "data/data.xml",
     "data/data_noupdate.xml",
     "data/room_stages.xml",

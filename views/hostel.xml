@@ -117,6 +117,7 @@
         <field name="model">hostel.hostel</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="id" />
                 <field name="name" />
                 <field name="hostel_code" />
                 <field name="phone" />

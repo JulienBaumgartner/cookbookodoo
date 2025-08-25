@@ -92,14 +92,28 @@ class Main(http.Controller):
     @http.route('/custom-page', type='http', auth='public', website=True)
     def custom_page(self, **kw):
         return request.render('my_hostel.custom_template', {})
-    
+
     @http.route('/hostel/<model("hostel.hostel"):hostel>',
-            type='http', auth="user", website=True)
+                type='http', auth="user", website=True)
     def hostel_room_detail(self, hostel):
         return request.render(
             'my_hostel.hostel_detail', {
             'hostel': hostel,
             })
+
+    @http.route('/my_hostel/all-hostels', type='http', auth='public')
+    def all_hostels(self):
+        hostels = request.env['hostel.hostel'].sudo().search([])
+        html_result = '<html><body><ul>'
+        for hostel in hostels:
+            html_result += "<li> %s <a href='/hostel/%d'>View Details</a></li>" % (hostel.name, hostel.id)
+        html_result += '</ul></body></html>'
+        return html_result
+
+    @http.route('/my_hostel/hostelsJson/<int:limit>', type='json', auth='public')
+    def get_values(self, limit):
+        records = request.env['hostel.hostel'].sudo().search([], limit=limit)
+        return [{'id': r.id, 'name': r.name, 'hostel_code': r.hostel_code} for r in records]
 
 class WebsiteInfo(Website):
     @http.route()
@@ -110,3 +124,22 @@ class WebsiteInfo(Website):
         )
         return result
     
+class InquiryForm(http.Controller):
+    @http.route('/inquiry/form', type='http', auth="public",
+                website=True)
+    def inquiry_form_template(self, **kw):
+        return request.render("my_hostel.hostel_inquiry_form")
+
+    @http.route('/inquiry/submit', type='http', auth="public",
+                website=True)
+    def inquiry_form(self, **kwargs):
+        inquiry_obj = request.env['hostel.inquiries']
+        form_vals = {
+            'name': kwargs.get('name') or '',
+            'email': kwargs.get('email') or '',
+            'phone': kwargs.get('phone') or '',
+            'book_fy': kwargs.get('book_fy') or '',
+            'queries': kwargs.get('queries') or '',
+            }
+        submit_success = inquiry_obj.sudo().create(form_vals)
+        return request.redirect('/contactus-thank-you')

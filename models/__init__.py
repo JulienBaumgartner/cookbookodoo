@@ -10,3 +10,4 @@ from . import hostel_room_availability
 from . import hostel_room_stage
 from . import res_config_settings
 from . import ir_http
+from . import inquiries
