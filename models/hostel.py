@@ -1,7 +1,9 @@
 from odoo import fields, models, api
+from odoo.addons.http_routing.models.ir_http import slug
 class Hostel(models.Model):
     _name = 'hostel.hostel'
     _description = "Information about hostel"
+    _inherit = ['website.seo.metadata', 'website.multi.mixin', 'website.published.mixin']
     _order = "id desc, name"
     _rec_name = 'hostel_code'
     _rec_names_search = ['name', 'code']
@@ -38,6 +40,8 @@ class Hostel(models.Model):
     
     rector = fields.Many2one("res.partner", "Rector",
         help="Select hostel rector")
+    
+    restrict_country_ids = fields.Many2many('res.country')
 
     @api.depends('hostel_code')
     def _compute_display_name(self): 
@@ -62,3 +66,8 @@ class Hostel(models.Model):
         room_obj = self.env['hostel.room']
         for hostel in self:
             hostel.rooms_count = room_obj.search_count([('hostel_id', '=', hostel.id)])
+            
+    @api.depends('name')
+    def _compute_website_url(self):
+        for hostel in self:
+            hostel.website_url = '/hostel/%s' % (slug(hostel))

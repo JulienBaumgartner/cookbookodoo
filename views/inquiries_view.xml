@@ -12,6 +12,7 @@
                     <field name="phone" />
                     <field name="email" />
                     <field name="book_fy" />
+                    <field name="campaign_id"/>
                 </tree>
             </field>
         </record>

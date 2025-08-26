@@ -32,6 +32,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Available date</th>
+                        <th>View Details</th>
                     </tr>
                 </table>
             </div>

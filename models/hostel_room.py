@@ -52,6 +52,7 @@ class HostelRoom(models.Model):
     popularity = fields.Selection([('no', 'No Demand'), ('low','Low Demand'),
                                    ('medium', 'Average Demand'), ('high', 'High Demand'),])
     
+    color_category = fields.Integer('Color category')
 
     @api.constrains("rent_amount")
     def _check_rent_amount(self):

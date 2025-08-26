@@ -46,7 +46,8 @@ publicWidget.registry.HostelSnippet = publicWidget.Widget.extend({
                 self.$el.append(
                     $("<tr />").append(
                         $("<td />").text(hostel.name),
-                        $("<td />").text(hostel.hostel_code || "")
+                        $("<td />").text(hostel.hostel_code || ""),
+                        $("<td />").html(`<a href='/hostel/${hostel.id}'>View Details</a>`),
                     )
                 );
             });

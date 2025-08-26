@@ -37,7 +37,8 @@
                             <field name="room_number" />
                             <field name="room_floor" />
                             <field name="hostel_id" />
-                            <field name="active" invisible="1"/>
+                            <field name="active" invisible="1" />
+                            <field name="color_category" widget="category_color" />
                         </group>
                         <group>
                             <field name="currency_id" required="1" placeholder="Currency" />

@@ -3,6 +3,7 @@ from odoo import fields, models
 class Inquiries(models.Model):
     _name = 'hostel.inquiries'
     _description = "Inquiries about hostel"
+    _inherit = ['utm.mixin']
     # _order = "id desc,"
     name = fields.Char(string="Student Name", required=True)
     phone = fields.Char(string="Phone", required=True)

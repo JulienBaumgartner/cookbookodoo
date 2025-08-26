@@ -6,18 +6,24 @@
 'website': "http://www.example.com",
 'category': 'Hostel',
 'version': '17.0.6.0.3',
-'depends': ['base', 'mail', 'web_cohort', 'web_gantt', 'web_map', 'base_setup', 'website'],
+'depends': ['base', 'mail', 'web_cohort', 'web_gantt', 'web_map', 'base_setup', 'website', 'utm'],
 'assets': {
     'web.assets_frontend': [
         'my_hostel/static/src/scss/hostel.scss',
         'my_hostel/static/src/js/hostel.js',
         'my_hostel/static/src/js/snippets.js',
     ],
+    'web.assets_backend': [
+        'my_hostel/static/src/scss/field_widget.scss',
+        'my_hostel/static/src/js/field_widget.js',
+        'my_hostel/static/src/xml/field_widget.xml',
+    ],
 },
 'data': [
     "security/security_rules.xml",
     "security/hostel_security.xml",
     "security/ir.model.access.csv",
+    "security/rules.xml",
     "views/hostel.xml",
     "views/hostel_categ.xml",
     "views/hostel_room.xml",

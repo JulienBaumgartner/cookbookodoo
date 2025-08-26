@@ -29,9 +29,13 @@
                     <button name="add_details" string="Add Details" type="object" />
                 </header>
                 <sheet>
-
                     <div class="oe_button_box" name="button_box">
-                        <button class="oe_stat_button" name="%(my_hostel.action_hostel_room)d" type="action"
+                        <field name="is_published"
+                            widget="website_redirect_button" />
+                    </div>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="%(my_hostel.action_hostel_room)d"
+                            type="action"
                             icon="fa-building" context="{'search_default_hostel_id': active_id}">
                             <field string="Rooms" name="rooms_count"
                                 widget="statinfo" />
@@ -86,6 +90,8 @@
                             <field name="mobile" widget="phone" />
                             <field name="email" widget="email" context="{'gravatar_image': True}" />
                             <field name="ref_doc_id" />
+                            <field name="restrict_country_ids" widget="many2many_tags" />
+                            <field name="website_id" />
                         </group>
                         <group>
                             <field name="rector" />

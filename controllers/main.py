@@ -3,6 +3,9 @@ from odoo.http import request
 import email
 import datetime
 from odoo.addons.website.controllers.main import Website
+from odoo.addons.http_routing.models.ir_http import slug
+from odoo.addons.website.models.ir_http import sitemap_qs2dom
+import werkzeug
 
 class Main(http.Controller):
     @http.route('/my_hostel/students', type='http', auth='none')
@@ -93,12 +96,26 @@ class Main(http.Controller):
     def custom_page(self, **kw):
         return request.render('my_hostel.custom_template', {})
 
+
+    def sitemap_hostels(env, rule, qs):
+        Hostels = env['hostel.hostel']
+        dom = sitemap_qs2dom(qs, '/hostels', Hostels._rec_name)
+        #Ex. to filter urls
+        #dom += [('name', 'ilike', 'abc')]
+        for f in Hostels.search(dom):
+            loc = '/hostels/%s' % slug(f)
+            if not qs or qs.lower() in loc:
+                yield {'loc': loc}
+
     @http.route('/hostel/<model("hostel.hostel"):hostel>',
-                type='http', auth="user", website=True)
-    def hostel_room_detail(self, hostel):
+                type='http', auth="public", website=True, sitemap=sitemap_hostels)
+    def hostel_room_detail(self, hostel, **post):
+        if not hostel.can_access_from_current_website():
+            raise werkzeug.exceptions.NotFound()
         return request.render(
             'my_hostel.hostel_detail', {
             'hostel': hostel,
+            'main_object': hostel
             })
 
     @http.route('/my_hostel/all-hostels', type='http', auth='public')
@@ -110,10 +127,24 @@ class Main(http.Controller):
         html_result += '</ul></body></html>'
         return html_result
 
-    @http.route('/my_hostel/hostelsJson/<int:limit>', type='json', auth='public')
-    def get_values(self, limit):
-        records = request.env['hostel.hostel'].sudo().search([], limit=limit)
+    @http.route('/my_hostel/hostelsJson/<int:limit>', type='json', auth='public', website=True)
+    def get_values(self, limit, **post):
+        
+        country_id = False
+        country_ids = False
+        country_code = request.geoip and request.geoip.get('country_code') or 'CH'
+        if country_code:
+            country_ids = request.env['res.country'].sudo().search([('code', '=', country_code)])
+        if country_ids:
+            country_id = country_ids[0].id
+        domain = ['|', ('restrict_country_ids', '=', False), ('restrict_country_ids', 'not in', [country_id])]
+        
+        domain += request.website.website_domain()
+        
+        records = request.env['hostel.hostel'].sudo().search(domain, limit=limit)
         return [{'id': r.id, 'name': r.name, 'hostel_code': r.hostel_code} for r in records]
+    
+    
 
 class WebsiteInfo(Website):
     @http.route()
