@@ -11,3 +11,6 @@ from . import hostel_room_stage
 from . import res_config_settings
 from . import ir_http
 from . import inquiries
+from . import base
+from . import ir_action_act_window
+from . import ir_ui_view

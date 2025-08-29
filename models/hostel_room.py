@@ -23,6 +23,8 @@ class HostelRoom(models.Model):
     
     active = fields.Boolean(default=True)
     room_name = fields.Char(string="Room Name", required=True)
+    name = fields.Char(compute='_show_name')
+    
     room_number = fields.Integer(string="Room Number", required=True)
     room_floor = fields.Integer(string="Room Floor", required=True)
     description = fields.Html('Description')
@@ -53,6 +55,13 @@ class HostelRoom(models.Model):
                                    ('medium', 'Average Demand'), ('high', 'High Demand'),])
     
     color_category = fields.Integer('Color category')
+    image = fields.Binary('Room Image')
+
+    @api.depends("room_name")
+    def _show_name(self):
+        """Method to show room name"""
+        for rec in self:
+            rec.name = rec.room_name
 
     @api.constrains("rent_amount")
     def _check_rent_amount(self):
