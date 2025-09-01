@@ -55,6 +55,7 @@ class HostelRoom(models.Model):
                                    ('medium', 'Average Demand'), ('high', 'High Demand'),])
     
     color_category = fields.Integer('Color category')
+    color2 = fields.Integer('Color 2')
     image = fields.Binary('Room Image')
 
     @api.depends("room_name")

@@ -1,7 +1,8 @@
-/** @odoo-module */
+/** @odoo-module **/
 import { Component, onWillStart, onWillUpdateProps } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { renderToElement } from "@web/core/utils/render";
+import mobile from "@web_mobile/js/services/core";
 
 export class CategColorField extends Component {
     setup() {
@@ -15,6 +16,9 @@ export class CategColorField extends Component {
         super.setup();
     }
     clickPill(value) {
+        if (mobile.methods.showToast) {
+            mobile.methods.showToast({ 'message': 'Color changed' });
+        }
         this.props.record.update({ [this.props.name]: value });
     }
     categInfo(ev) {

@@ -9,9 +9,14 @@ export class M2mGroupRenderer extends Component {
         const domain = [['id', 'in', children_ids]]
         this.props.onClickViewButton(domain);
     }
+
+    onClickChild(child) {
+        this.props.onClickOpenForm(child.id);
+    }
+
     get groups() {
         return this.props.model.data
     }
 }
 M2mGroupRenderer.template = "M2mGroupRenderer";
-M2mGroupRenderer.props = ["model", "onClickViewButton"];
+M2mGroupRenderer.props = ["model", "onClickViewButton", "onClickOpenForm"];

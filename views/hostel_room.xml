@@ -76,6 +76,7 @@
                     <field name="description" />
                     <field name="room_rating" />
                     <field name="category_id" />
+                    <field name="color2" widget="custom_color" />
 
                 </group>
             </xpath>

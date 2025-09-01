@@ -29,9 +29,22 @@ export class M2mGroupController extends Component {
             target: 'new'
         });
     }
+
+     _onOpenForm(resId) {
+        this.actionService.doAction({
+            type: 'ir.actions.act_window',
+            res_model: this.props.resModel,
+            res_id: resId,
+            views: [[false, 'form']],
+            target: 'current'
+        });
+    }
 }
 M2mGroupController.template = "M2mGroupView";
 M2mGroupController.components = { Layout };
+
+// debugger;
+// console.log("Debugging call…….")
 
 M2mGroupController.props = {
     ...standardViewProps,

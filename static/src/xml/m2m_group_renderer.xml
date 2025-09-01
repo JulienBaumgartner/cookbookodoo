@@ -15,7 +15,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <t t-foreach="group_data['children']" t-as="child" t-key="child.id">
-                            <li class="list-group-item">
+                            <li class="list-group-item" t-on-click="() => this.onClickChild(child)">
                                 <i class="fa fa-user"/> <t t-esc="child.name"/>
                             </li>
                         </t>

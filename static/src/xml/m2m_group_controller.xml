@@ -9,7 +9,8 @@
                 <div>
                     <t t-component="props.Renderer" 
                        model="model"
-                       onClickViewButton="group => this._onBtnClicked(group)"/>
+                       onClickViewButton="group => this._onBtnClicked(group)"
+                       onClickOpenForm="resId => this._onOpenForm(resId)"/>
                 </div>
             </Layout>
         </div>
