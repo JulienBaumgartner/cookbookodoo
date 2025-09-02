@@ -38,10 +38,10 @@
     ],
 },
 'data': [
-    "security/security_rules.xml",
     "security/hostel_security.xml",
     "security/ir.model.access.csv",
     "security/rules.xml",
+    "security/security_rules.xml",
     "views/hostel.xml",
     "views/hostel_categ.xml",
     "views/hostel_room.xml",

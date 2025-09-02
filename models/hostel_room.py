@@ -38,7 +38,7 @@ class HostelRoom(models.Model):
     student_ids = fields.One2many("hostel.student", "room_id", string="Students", help="Enter students")
     hostel_amenities_ids = fields.Many2many("hostel.amenities", "hostel_room_amenities_rel", "room_id", "amenity_id", string="Amenities", domain="[('active', '=', True)]", help="Select hostel room amenities")
 
-    # state = fields.Selection([('draft', 'Unavailable'),('available', 'Available'),('closed', 'Closed')],'State', default="draft")
+    state = fields.Selection([('draft', 'Unavailable'),('available', 'Available'),('closed', 'Closed')],'State', default="draft")
     stage_id = fields.Many2one('hostel.room.stage', string='Stage', default=_default_room_stage, group_expand="_group_expand_stages")
     remarks = fields.Text('Remarks')
     previous_room = fields.Many2one('hostel.room', string='Previous Room')

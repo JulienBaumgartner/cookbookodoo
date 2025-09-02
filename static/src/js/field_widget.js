@@ -1,4 +1,5 @@
 /** @odoo-module **/
+
 import { Component, onWillStart, onWillUpdateProps } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 import { renderToElement } from "@web/core/utils/render";

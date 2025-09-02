@@ -9,14 +9,12 @@
     </t>
 
     <t t-name="OWLFieldColorPills" >
-        <span>
         <t t-foreach="totalColors" t-as='color' t-key="color">
             <ColorPill onClickColorUpdated="data => this.colorUpdated(data)"
                        color='color'
-                       value="props.value"
+                       value="props.record.data[props.name]"
                        category_count="categoryInfo[color]"/>
         </t>
-        </span>
     </t>
 
 </templates>

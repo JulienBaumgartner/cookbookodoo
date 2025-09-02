@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { Component, onWillStart , onWillUpdateProps} from "@odoo/owl";
+import { Component, onWillStart, onWillUpdateProps } from "@odoo/owl";
 import { registry } from "@web/core/registry";
 
 class ColorPill extends Component {
@@ -16,6 +16,7 @@ export class OWLCategColorField extends Component {
     static components = { ColorPill };
     setup() {
         this.totalColors = [1,2,3,4,5,6];
+        
         onWillStart(async() => {
             await this.loadCategInformation();
         });
@@ -25,7 +26,7 @@ export class OWLCategColorField extends Component {
         super.setup();
     }
     colorUpdated(value) {
-        this.props.update({ [this.props.name]: value });
+        this.props.record.update({ [this.props.name]: value });
     }
     async loadCategInformation() {
         var self = this;
@@ -41,7 +42,7 @@ export class OWLCategColorField extends Component {
             groupby
         );
         categInfoPromise.map((info) => {
-            self.categoryInfo[info.category] = info.category_count;
+            self.categoryInfo[info.color2] = info.color2_count;
         });
     }
 }
