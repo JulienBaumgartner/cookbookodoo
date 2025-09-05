@@ -27,6 +27,7 @@
         'my_hostel/static/src/js/m2m_group_model.js',
         'my_hostel/static/src/js/m2m_group_controller.js',
         'my_hostel/static/src/js/my_hostel_tour.js',
+        'my_hostel/static/src/js/my_hostel_test_tour.js',
         'my_hostel/static/src/js/component.js',
         
         # xml
@@ -35,6 +36,9 @@
         'my_hostel/static/src/xml/m2m_group_controller.xml',
         'my_hostel/static/src/xml/m2m_group_renderer.xml',
         'my_hostel/static/src/xml/m2m_group_view.xml',
+    ],
+    'web.qunit_suite_tests': [
+        'my_hostel/static/tests/**/*',
     ],
 },
 'data': [

@@ -26,7 +26,7 @@ class HostelRoom(models.Model):
     name = fields.Char(compute='_show_name')
     
     room_number = fields.Integer(string="Room Number", required=True)
-    room_floor = fields.Integer(string="Room Floor", required=True)
+    room_floor = fields.Integer(string="Room Floor")
     description = fields.Html('Description')
     currency_id = fields.Many2one('res.currency', string='Currency')
     rent_amount = fields.Monetary('Rent Amount', help="Enter rent amount per month") # optional attribute: currency_field='currency_id' incase currency field have another name then 'currency_id'
