@@ -1,7 +1,7 @@
 from . import models
 from . import controllers
 from . import wizards
-from . import controllers
+from . import populate
 
 from odoo import api, SUPERUSER_ID
 

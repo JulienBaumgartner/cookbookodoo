@@ -86,8 +86,8 @@ odoo.define('my_hostel.component', [], function (require) {
         }
     }
 
-    whenReady().then(() => {
-        mount(MyComponent, document.body);
-    });
+    // whenReady().then(() => {
+    //     mount(MyComponent, document.body);
+    // });
 
 });
