@@ -26,7 +26,6 @@ class HostelData(models.Model):
     _populate_dependencies = ["hostel.student"]
 
     def _populate_factories(self):
-        _logger.warning("Populate factory for hostel.room called!")
         student_ids = self.env.registry.populated_models['hostel.student']
         def get_student_ids(values, counter, random):
             return [
@@ -35,11 +34,9 @@ class HostelData(models.Model):
                 ])
             ]
         
-        room_number_start = 10000
         def get_room_number(values, counter, random):
-            room_number_start += 1
-            return room_number_start
-        
+            return 10000 + counter
+
         return [
             ('room_name', populate.constant('Hostel Room {counter}')),
             ('room_number', populate.compute(get_room_number)),
